@@ -8,14 +8,14 @@
 #include "toneAC.h"
 
 unsigned long _tAC_time; // Used to track end note with timer when playing note in the background.
-#ifndef TONEAC_TINY
+/*#ifndef TONEAC_TINY
 uint8_t _tAC_volume[] = { 200, 100, 67, 50, 40, 33, 29, 22, 11, 2 }; // Duty for linear volume control.
-#endif
+#endif */
 
 #ifndef TONEAC_TINY
 void toneAC(unsigned long frequency, uint8_t volume, unsigned long length, uint8_t background) {
   if (frequency == 0 || volume == 0) { noToneAC(); return; } // If frequency or volume are 0, turn off sound and return.
-  if (volume > 10) volume = 10;                              // Make sure volume is in range (1 to 10).
+  if (volume > 200) volume = 200;                              // Make sure volume is in range (1 to 10).
 #else
 void toneAC(unsigned long frequency, unsigned long length) {
   if (frequency == 0) { noToneAC(); return; }                // If frequency is 0, turn off sound and return.
@@ -30,7 +30,7 @@ void toneAC(unsigned long frequency, unsigned long length) {
     top = top / 256 - 1;                         // Calculate the top using prescaler 256.
   }
 #ifndef TONEAC_TINY
-  unsigned int duty = top / _tAC_volume[volume - 1]; // Calculate the duty cycle (volume).
+  unsigned int duty = top / volume; // Calculate the duty cycle (volume).
 #else
   unsigned int duty = top >> 1;                      // 50% duty cycle (loudest and highest quality).
 #endif

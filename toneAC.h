@@ -103,7 +103,7 @@
   #endif
 
   #ifndef TONEAC_TINY
-    void toneAC(unsigned long frequency = 0, uint8_t volume = 10, unsigned long length = 0, uint8_t background = false);
+    void toneAC(unsigned long frequency = 0, uint8_t volume = 2, unsigned long length = 0, uint8_t background = false);
   #else
     void toneAC(unsigned long frequency = 0, unsigned long length = 0);
   #endif
